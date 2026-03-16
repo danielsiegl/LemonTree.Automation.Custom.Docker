@@ -16,11 +16,8 @@ RUN git --version && \
     git lfs version && \
     pwsh --version
 
-# Add /app to PATH so lemontree.automation is accessible everywhere
-ENV PATH="/app:${PATH}"
-
-# Make all scripts in /app executable
-RUN chmod +x /app/* || true
+# Create symlink to lemontree.automation in /usr/local/bin for global access
+RUN ln -s /app/lemontree.automation /usr/local/bin/lemontree.automation || true
 
 # Set working directory to root
 WORKDIR /
