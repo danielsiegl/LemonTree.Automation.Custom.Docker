@@ -2,12 +2,14 @@ FROM nexus.lieberlieber.com:5000/lieberlieber/lemontree.automation:latest
 
 USER root
 
-# Install git, git-lfs and PowerShell
-RUN echo 'APT::Get::AllowUnauthenticated "true";' >> /etc/apt/apt.conf.d/99-allow-unauthenticated && \
-    echo "deb [trusted=yes] http://ppa.launchpad.net/git-core/ppa/ubuntu jammy main" > /etc/apt/sources.list.d/git-core-ubuntu-ppa-jammy.list && \
-    echo "deb [trusted=yes] https://packages.microsoft.com/repos/microsoft-debian-bookworm-prod bookworm main" > /etc/apt/sources.list.d/microsoft.list && \
+# Install git, git-lfs, bash, curl, and PowerShell in one layer
+RUN apt-get update && \
+    apt-get install -y git git-lfs bash curl wget ca-certificates && \
+    wget -q https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -O /tmp/packages-microsoft-prod.deb && \
+    dpkg -i /tmp/packages-microsoft-prod.deb && \
     apt-get update && \
-    apt-get install -y git git-lfs powershell bash curl && \
+    apt-get install -y powershell && \
+    rm /tmp/packages-microsoft-prod.deb && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -15,15 +17,6 @@ RUN echo 'APT::Get::AllowUnauthenticated "true";' >> /etc/apt/apt.conf.d/99-allo
 RUN git --version && \
     git lfs version && \
     pwsh --version
-
-# Security: Update packages to address CVEs
-RUN apt-get update && \
-    apt-get install -y --only-upgrade \
-        ca-certificates \
-        openssl \
-        libssl3 \
-    && apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
 
 # Create symlink to lemontree.automation in /usr/local/bin for global access
 RUN ln -s /app/lemontree.automation /usr/local/bin/lemontree.automation || true
