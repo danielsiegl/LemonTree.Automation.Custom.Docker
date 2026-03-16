@@ -16,6 +16,15 @@ RUN git --version && \
     git lfs version && \
     pwsh --version
 
+# Security: Update packages to address CVEs
+RUN apt-get update && \
+    apt-get install -y --only-upgrade \
+        ca-certificates \
+        openssl \
+        libssl3 \
+    && apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # Create symlink to lemontree.automation in /usr/local/bin for global access
 RUN ln -s /app/lemontree.automation /usr/local/bin/lemontree.automation || true
 
