@@ -21,12 +21,10 @@ RUN ln -s /app/lemontree.automation /usr/local/bin/lemontree.automation || true
 
 # Download and set up LemonTree.Pipeline.Tools.ModelCheck
 RUN cd /app && \
-    curl -o LemonTree.Pipeline.Tools.ModelCheck https://nexus.lieberlieber.com/repository/lemontree-pipeline-tools/LemonTree.Pipeline.Tools.ModelCheck && \
+    curl -o lemontree.pipeline.tools.modelcheck https://nexus.lieberlieber.com/repository/lemontree-pipeline-tools/LemonTree.Pipeline.Tools.ModelCheck && \
     chmod +x LemonTree.Pipeline.Tools.ModelCheck && \
     ln -s /app/LemonTree.Pipeline.Tools.ModelCheck /usr/local/bin/lemontree-modelcheck || true
 
 # Set working directory to root
 WORKDIR /
 
-# Set PowerShell as default shell
-ENTRYPOINT ["pwsh"]
