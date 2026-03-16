@@ -32,7 +32,7 @@ RUN ln -s /app/lemontree.automation /usr/local/bin/lemontree.automation || true
 RUN cd /app && \
     curl -o lemontree.pipeline.tools.modelcheck https://nexus.lieberlieber.com/repository/lemontree-pipeline-tools/LemonTree.Pipeline.Tools.ModelCheck && \
     chmod +x lemontree.pipeline.tools.modelcheck && \
-    ln -s /app/lemontree.pipeline.tools.modelcheck /usr/local/bin/lemontree-modelcheck || true
+    ln -s /app/lemontree.pipeline.tools.modelcheck /usr/local/bin/lemontree.modelcheck || true
 
 # Set working directory to root
 WORKDIR /
