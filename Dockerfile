@@ -22,9 +22,12 @@ RUN ln -s /app/lemontree.automation /usr/local/bin/lemontree.automation || true
 # Download and set up LemonTree.Pipeline.Tools.ModelCheck
 RUN cd /app && \
     curl -o lemontree.pipeline.tools.modelcheck https://nexus.lieberlieber.com/repository/lemontree-pipeline-tools/LemonTree.Pipeline.Tools.ModelCheck && \
-    chmod +x LemonTree.Pipeline.Tools.ModelCheck && \
-    ln -s /app/LemonTree.Pipeline.Tools.ModelCheck /usr/local/bin/lemontree-modelcheck || true
+    chmod +x lemontree.pipeline.tools.modelcheck && \
+    ln -s /app/lemontree.pipeline.tools.modelcheck /usr/local/bin/lemontree-modelcheck || true
 
 # Set working directory to root
 WORKDIR /
+
+# Set sh as default entrypoint
+ENTRYPOINT ["/bin/sh"]
 
