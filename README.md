@@ -2,5 +2,6 @@
 This is a custom LemonTree.Automation Docker Container with Git, Git LFS and Pwsh
 
 ´´´
-docker run -it lemontree.automation.custom:latest
+docker pull ghcr.io/danielsiegl/lemontree.automation.custom.docker:latest
+docker run -it ghcr.io/danielsiegl/lemontree.automation.custom.docker:latest
 ´´´
