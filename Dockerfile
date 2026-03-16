@@ -4,7 +4,12 @@ USER root
 
 # Install git, git-lfs, bash, curl, and PowerShell in one layer
 RUN apt-get update && \
-    apt-get install -y git git-lfs bash curl wget ca-certificates && \
+    apt-get install -y wget ca-certificates && \
+    echo 'APT::Get::AllowUnauthenticated "true";' >> /etc/apt/apt.conf.d/99-allow-unauthenticated && \
+    echo "deb [trusted=yes] http://ppa.launchpad.net/git-core/ppa/ubuntu jammy main" > /etc/apt/sources.list.d/git-core-ppa.list && \
+    apt-get update && \
+    apt-get install -y git bash curl && \
+    apt-get install -y git-lfs && \
     wget -q https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -O /tmp/packages-microsoft-prod.deb && \
     dpkg -i /tmp/packages-microsoft-prod.deb && \
     apt-get update && \
