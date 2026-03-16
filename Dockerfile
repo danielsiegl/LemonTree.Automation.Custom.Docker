@@ -28,6 +28,3 @@ RUN cd /app && \
 # Set working directory to root
 WORKDIR /
 
-# Set sh as default entrypoint
-ENTRYPOINT ["/bin/sh"]
-
