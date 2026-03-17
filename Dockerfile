@@ -4,7 +4,7 @@ USER root
 
 # Install git, git-lfs, bash, curl, and PowerShell in one layer
 RUN apt-get update && \
-    apt-get install -y wget ca-certificates && \
+    apt-get install -y wget ca-certificates unzip && \
     echo 'APT::Get::AllowUnauthenticated "true";' >> /etc/apt/apt.conf.d/99-allow-unauthenticated && \
     echo "deb [trusted=yes] http://ppa.launchpad.net/git-core/ppa/ubuntu jammy main" > /etc/apt/sources.list.d/git-core-ppa.list && \
     apt-get update && \
@@ -51,6 +51,16 @@ RUN cd /app && \
     curl -o lemontree.pipeline.tools.modelcheck https://nexus.lieberlieber.com/repository/lemontree-pipeline-tools/LemonTree.Pipeline.Tools.ModelCheck && \
     chmod +x lemontree.pipeline.tools.modelcheck && \
     ln -s /app/lemontree.pipeline.tools.modelcheck /usr/local/bin/lemontree.modelcheck || true
+
+# Download and set up LemonTree.Connect.Automation.Polarion
+RUN mkdir -p /tmp/polarion-extract && \
+    cd /tmp/polarion-extract && \
+    curl -L -o lemontree.connect.polarion.zip https://nexus.lieberlieber.com/repository/lemontree-release/LemonTree.Automation/LemonTree.Connect.Automation.Polarion.Linux_3.1.0.zip && \
+    unzip -q lemontree.connect.polarion.zip && \
+    cp -r LemonTree.Connect.Polarion.Automation Mapping NLog.config EULA.rtf /app/ && \
+    chmod +x /app/LemonTree.Connect.Polarion.Automation && \
+    rm -rf /tmp/polarion-extract && \
+    ln -s /app/LemonTree.Connect.Polarion.Automation /usr/local/bin/lemontree.polarion || true
 
 # Set working directory to root
 WORKDIR /
