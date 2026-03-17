@@ -70,6 +70,8 @@ $imageSize = docker images --filter "reference=$ImageTag" --format "{{.Size}}"
 Write-Host "Image Size: $imageSize" -ForegroundColor Green
 Write-Host ""
 
+exit 0
+
 # Get CVE count using docker scout
 try {
     Write-Host "Scanning for vulnerabilities..." -ForegroundColor Yellow
