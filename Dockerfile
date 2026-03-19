@@ -48,7 +48,7 @@ RUN ln -s /app/lemontree.automation /usr/local/bin/lemontree.automation || true
 
 # Download and set up LemonTree.Pipeline.Tools.ModelCheck
 RUN cd /app && \
-    curl -o lemontree.pipeline.tools.modelcheck https://nexus.lieberlieber.com/repository/lemontree-pipeline-tools/LemonTree.Pipeline.Tools.ModelCheck && \
+    curl -o lemontree.pipeline.tools.modelcheck https://nexus.lieberlieber.com/repository/lemontree-pipeline-tools/v2.5.6/LemonTree.Pipeline.Tools.ModelCheck && \
     chmod +x lemontree.pipeline.tools.modelcheck && \
     ln -s /app/lemontree.pipeline.tools.modelcheck /usr/local/bin/lemontree.modelcheck || true
 
@@ -62,6 +62,14 @@ RUN mkdir -p /tmp/polarion-extract && \
     rm -rf /tmp/polarion-extract && \
     ln -s /app/LemonTree.Connect.Polarion.Automation /usr/local/bin/lemontree.polarion || true
 
+# Copy version script
+COPY versions.sh /usr/local/bin/versions.sh
+RUN chmod +x /usr/local/bin/versions.sh
+
 # Set working directory to root
 WORKDIR /
+
+
+
+
 
