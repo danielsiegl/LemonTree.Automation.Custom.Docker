@@ -17,21 +17,21 @@ print_version() {
 echo "Installed Components:"
 echo ""
 
-# Git
-git_version=$(git --version 2>&1)
-print_version "Git" "$git_version"
+# Git - extract version number only
+git_version=$(git --version 2>&1 | awk '{print $3}')
+print_version "git" "Git $git_version"
 
-# Git LFS
-git_lfs_version=$(git lfs version 2>&1 | head -n 1)
-print_version "Git LFS" "$git_lfs_version"
+# Git LFS - extract version number only
+git_lfs_version=$(git lfs version 2>&1 | head -n 1 | awk -F'/' '{print $1}' | awk '{print $NF}')
+print_version "git lfs" "Git LFS $git_lfs_version"
 
 # PowerShell
-pwsh_version=$(pwsh --version 2>&1)
-print_version "PowerShell" "$pwsh_version"
+pwsh_version=$(pwsh --version 2>&1 | awk '{print $NF}')
+print_version "pwsh" "PowerShell $pwsh_version"
 
-# Go
-go_version=$(go version 2>&1)
-print_version "Go" "$go_version"
+# Go - extract version number only (remove "linux/amd64" suffix)
+go_version=$(go version 2>&1 | awk '{print $3}')
+print_version "go" "Go $go_version"
 
 # LemonTree.Automation - extract line after Copyright © LieberLieber Software GmbH
 if [ -f /app/lemontree.automation ]; then
