@@ -14,23 +14,33 @@ print_version() {
 }
 
 # Collect and display versions
-echo "Installed Components:"
+echo "Docker Image Summary:"
 echo ""
+
+# Operating System
+if [ -f /etc/os-release ]; then
+    os_name=$(grep "^NAME=" /etc/os-release | cut -d'"' -f2)
+    os_version=$(grep "^VERSION=" /etc/os-release | cut -d'"' -f2)
+    print_version "os" "$os_name $os_version"
+else
+    os_info=$(uname -s -r)
+    print_version "os" "$os_info"
+fi
 
 # Git - extract version number only
 git_version=$(git --version 2>&1 | awk '{print $3}')
 print_version "git" "Git $git_version"
 
 # Git LFS - extract version number only
-git_lfs_version=$(git lfs version 2>&1 | head -n 1 | awk -F'/' '{print $1}' | awk '{print $NF}')
+git_lfs_version=$(git lfs version 2>&1 | head -n 1 | awk -F'/' '{print $2}' | awk '{print $1}')
 print_version "git lfs" "Git LFS $git_lfs_version"
 
 # PowerShell
 pwsh_version=$(pwsh --version 2>&1 | awk '{print $NF}')
 print_version "pwsh" "PowerShell $pwsh_version"
 
-# Go - extract version number only (remove "linux/amd64" suffix)
-go_version=$(go version 2>&1 | awk '{print $3}')
+# Go - extract version number only (remove "go" prefix)
+go_version=$(go version 2>&1 | awk '{print $3}' | sed 's/^go//')
 print_version "go" "Go $go_version"
 
 # LemonTree.Automation - extract line after Copyright © LieberLieber Software GmbH
