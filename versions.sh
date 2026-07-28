@@ -73,6 +73,12 @@ if command -v rsvg-convert &> /dev/null; then
     print_version "rsvg-convert" "$rsvg_version"
 fi
 
+# Inkscape
+if command -v inkscape &> /dev/null; then
+    inkscape_version=$(inkscape --version 2>&1 | head -n 1)
+    print_version "inkscape" "$inkscape_version"
+fi
+
 echo ""
 echo "════════════════════════════════════════════════════════════"
 echo ""

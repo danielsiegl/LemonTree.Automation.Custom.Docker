@@ -11,6 +11,7 @@ A custom Docker image extending LemonTree.Automation with:
 - **LemonTree.Connect.Automation.Polarion** v3.1.0.0 - Available as `lemontree.polarion` command
 - **LemonTree.Connect.Jama.Automation** - Available as `lemontree.jama` command
 - **rsvg-convert** (librsvg2-bin) - Available as `rsvg-convert` command for SVG to PNG conversion
+- **Inkscape** - Available as `inkscape` command for SVG editing and conversion
 
 ## Quick Start
 
@@ -35,6 +36,7 @@ PS /> git --version
 PS /> git lfs version
 PS /> go version
 PS /> rsvg-convert --version
+PS /> inkscape --version
 ```
 
 ### Running Specific Commands
