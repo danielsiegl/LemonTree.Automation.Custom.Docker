@@ -12,10 +12,13 @@ async function svgToPng(svgPath, pngPath, width, height) {
     const svgContent = fs.readFileSync(path.resolve(svgPath), 'utf8');
 
     // Try to detect dimensions from SVG attributes
+    // Match width/height attributes with optional px unit and flexible quote usage
     const widthMatch = svgContent.match(/\bwidth=["']?(\d+(?:\.\d+)?)(?:px)?["']?/i);
     const heightMatch = svgContent.match(/\bheight=["']?(\d+(?:\.\d+)?)(?:px)?["']?/i);
+    // Match viewBox="minX minY width height"
     const viewBoxMatch = svgContent.match(/viewBox=["']?\s*[\d.]+\s+[\d.]+\s+([\d.]+)\s+([\d.]+)/i);
 
+    // Fall back to 800x600 (common default canvas size) when no dimensions can be detected
     const svgWidth = width
         || (widthMatch ? Math.ceil(parseFloat(widthMatch[1])) : null)
         || (viewBoxMatch ? Math.ceil(parseFloat(viewBoxMatch[1])) : 800);
@@ -72,8 +75,8 @@ if (args.length < 2) {
 svgToPng(
     args[0],
     args[1],
-    args[2] ? parseInt(args[2]) : undefined,
-    args[3] ? parseInt(args[3]) : undefined
+    args[2] ? parseInt(args[2], 10) : undefined,
+    args[3] ? parseInt(args[3], 10) : undefined
 ).catch(err => {
     console.error('Error:', err.message);
     process.exit(1);
