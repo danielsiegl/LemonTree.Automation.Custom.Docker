@@ -61,6 +61,12 @@ if [ -f /app/LemonTree.Connect.Polarion.Automation ]; then
     print_version "lemontree.polarion" "$polarion_version"
 fi
 
+# LemonTree.Connect.Automation.Jama - extract line after Copyright © LieberLieber Software GmbH
+if [ -f /app/LemonTree.Connect.Jama.Automation ]; then
+    jama_version=$(/app/LemonTree.Connect.Jama.Automation --version 2>&1 | grep -A 1 "Copyright © LieberLieber Software GmbH" | tail -1)
+    print_version "lemontree.jama" "$jama_version"
+fi
+
 echo ""
 echo "════════════════════════════════════════════════════════════"
 echo ""
