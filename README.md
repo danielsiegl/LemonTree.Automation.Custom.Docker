@@ -6,6 +6,8 @@ A custom Docker image extending LemonTree.Automation with:
 - **PowerShell (pwsh)** (latest from Microsoft repo) - Set as default shell
 - **Bash**
 - **Go** - Latest version from official distribution
+- **Node.js** - LTS v20 (for Playwright)
+- **Playwright + Chromium** - Browser-based SVG to PNG conversion via `svg2png` command
 - **LemonTree.Automation** v4.2.2.0 - Available as `lemontree.automation` command
 - **LemonTree.Pipeline.Tools.ModelCheck** v2.5.6.23 - Available as `lemontree.modelcheck` command
 - **LemonTree.Connect.Automation.Polarion** v3.1.0.0 - Available as `lemontree.polarion` command
@@ -33,6 +35,8 @@ PS /> lemontree.jama --help
 PS /> git --version
 PS /> git lfs version
 PS /> go version
+PS /> node --version
+PS /> svg2png input.svg output.png
 ```
 
 ### Running Specific Commands
@@ -49,6 +53,26 @@ docker run -it ghcr.io/danielsiegl/lemontree.automation.custom.docker:latest -c 
 Override the default PowerShell:
 ```bash
 docker run -it ghcr.io/danielsiegl/lemontree.automation.custom.docker:latest /bin/bash
+```
+
+### SVG to PNG Conversion
+
+Convert an SVG file to PNG using the built-in Playwright/Chromium pipeline:
+
+```bash
+# Mount a local directory and convert a file
+docker run --rm -v $(pwd):/work ghcr.io/danielsiegl/lemontree.automation.custom.docker:latest \
+  -c "svg2png /work/diagram.svg /work/diagram.png"
+
+# Specify explicit dimensions
+docker run --rm -v $(pwd):/work ghcr.io/danielsiegl/lemontree.automation.custom.docker:latest \
+  -c "svg2png /work/diagram.svg /work/diagram.png 1920 1080"
+```
+
+Inside the container:
+```bash
+svg2png input.svg output.png          # auto-detect dimensions from SVG
+svg2png input.svg output.png 800 600  # explicit width x height
 ```
 
 ## Local Development

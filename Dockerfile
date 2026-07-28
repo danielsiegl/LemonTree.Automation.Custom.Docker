@@ -72,6 +72,34 @@ RUN mkdir -p /tmp/jama-extract && \
     rm -rf /tmp/jama-extract && \
     ln -s /app/LemonTree.Connect.Jama.Automation /usr/local/bin/lemontree.jama || true
 
+# Install Node.js (LTS v20) for Playwright SVG to PNG conversion
+RUN set -eux && \
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Verify Node.js installation
+RUN node --version && npm --version
+
+# Set up Playwright with Chromium for SVG to PNG conversion
+RUN mkdir -p /opt/svg2png && \
+    cd /opt/svg2png && \
+    npm init -y && \
+    npm install playwright && \
+    node node_modules/.bin/playwright install --with-deps chromium
+
+# Copy SVG to PNG conversion script and make it globally accessible
+COPY svg2png.js /opt/svg2png/svg2png.js
+RUN chmod +x /opt/svg2png/svg2png.js && \
+    ln -s /opt/svg2png/svg2png.js /usr/local/bin/svg2png
+
+# Smoke-test: verify SVG to PNG conversion works at build time
+RUN echo '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="40" fill="blue"/></svg>' > /tmp/test.svg && \
+    svg2png /tmp/test.svg /tmp/test.png && \
+    test -f /tmp/test.png && \
+    rm /tmp/test.svg /tmp/test.png
+
 # Copy version script
 COPY versions.sh /usr/local/bin/versions.sh
 RUN sed -i 's/\r$//' /usr/local/bin/versions.sh && chmod +x /usr/local/bin/versions.sh
