@@ -1,12 +1,15 @@
 # LemonTree.Automation.Custom.Docker
 
 A custom Docker image extending LemonTree.Automation with:
-- **Latest Git** (from git-core PPA) v2.53.0
-- **Git LFS** v3.3.0
-- **PowerShell (pwsh)** v7.5.5 - Set as default shell
+- **Latest Git** (from git-core PPA)
+- **Git LFS** v3.7.1
+- **PowerShell (pwsh)** v7.6.4 - Set as default shell
 - **Bash**
-- **LemonTree.Automation** - Available as `lemontree.automation` command
-- **LemonTree.Pipeline.Tools.ModelCheck** v2.5.5.22 - Available as `lemontree-modelcheck` command
+- **Go** - Latest version from official distribution
+- **LemonTree.Automation** v4.2.2.0 - Available as `lemontree.automation` command
+- **LemonTree.Pipeline.Tools.ModelCheck** v2.5.6.23 - Available as `lemontree.modelcheck` command
+- **LemonTree.Connect.Automation.Polarion** v3.1.0.0 - Available as `lemontree.polarion` command
+- **LemonTree.Connect.Jama.Automation** v4.0.1.0 - Available as `lemontree.jama` command
 
 ## Quick Start
 
@@ -24,16 +27,21 @@ Inside the container, you can use:
 
 ```powershell
 PS /> lemontree.automation --help
-PS /> lemontree-modelcheck --help
+PS /> lemontree.modelcheck --help
+PS /> lemontree.polarion --help
+PS /> lemontree.jama --help
 PS /> git --version
 PS /> git lfs version
+PS /> go version
 ```
 
 ### Running Specific Commands
 
 ```bash
 docker run -it ghcr.io/danielsiegl/lemontree.automation.custom.docker:latest -c "lemontree.automation diff --help"
-docker run -it ghcr.io/danielsiegl/lemontree.automation.custom.docker:latest -c "lemontree-modelcheck --help"
+docker run -it ghcr.io/danielsiegl/lemontree.automation.custom.docker:latest -c "lemontree.modelcheck --help"
+docker run -it ghcr.io/danielsiegl/lemontree.automation.custom.docker:latest -c "lemontree.polarion --help"
+docker run -it ghcr.io/danielsiegl/lemontree.automation.custom.docker:latest -c "lemontree.jama --help"
 ```
 
 ### Using Bash
