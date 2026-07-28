@@ -9,7 +9,7 @@ A custom Docker image extending LemonTree.Automation with:
 - **LemonTree.Automation** v4.2.2.0 - Available as `lemontree.automation` command
 - **LemonTree.Pipeline.Tools.ModelCheck** v2.5.6.23 - Available as `lemontree.modelcheck` command
 - **LemonTree.Connect.Automation.Polarion** v3.1.0.0 - Available as `lemontree.polarion` command
-- **LemonTree.Connect.Jama.Automation** v4.0.1.0 - Available as `lemontree.jama` command
+- **LemonTree.Connect.Jama.Automation** - Available as `lemontree.jama` command
 
 ## Quick Start
 
