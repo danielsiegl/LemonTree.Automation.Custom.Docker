@@ -10,6 +10,7 @@ A custom Docker image extending LemonTree.Automation with:
 - **LemonTree.Pipeline.Tools.ModelCheck** v2.5.6.23 - Available as `lemontree.modelcheck` command
 - **LemonTree.Connect.Automation.Polarion** v3.1.0.0 - Available as `lemontree.polarion` command
 - **LemonTree.Connect.Jama.Automation** - Available as `lemontree.jama` command
+- **rsvg-convert** (librsvg2-bin) - Available as `rsvg-convert` command for SVG to PNG conversion
 
 ## Quick Start
 
@@ -33,6 +34,7 @@ PS /> lemontree.jama --help
 PS /> git --version
 PS /> git lfs version
 PS /> go version
+PS /> rsvg-convert --version
 ```
 
 ### Running Specific Commands
