@@ -67,12 +67,6 @@ if [ -f /app/LemonTree.Connect.Jama.Automation ]; then
     print_version "lemontree.jama" "$jama_version"
 fi
 
-# rsvg-convert (librsvg2-bin)
-if command -v rsvg-convert &> /dev/null; then
-    rsvg_version=$(rsvg-convert --version 2>&1 | head -n 1)
-    print_version "rsvg-convert" "$rsvg_version"
-fi
-
 echo ""
 echo "════════════════════════════════════════════════════════════"
 echo ""
