@@ -62,6 +62,16 @@ RUN mkdir -p /tmp/polarion-extract && \
     rm -rf /tmp/polarion-extract && \
     ln -s /app/LemonTree.Connect.Polarion.Automation /usr/local/bin/lemontree.polarion || true
 
+# Download and set up LemonTree.Connect.Automation.Jama
+RUN mkdir -p /tmp/jama-extract && \
+    cd /tmp/jama-extract && \
+    curl -L -o lemontree.connect.jama.zip https://nexus.lieberlieber.com/repository/lemontree-release/LemonTree.Automation/LemonTree.Connect.Jama.Automation.Linux_latest.zip && \
+    unzip -q lemontree.connect.jama.zip && \
+    cp -r LemonTree.Connect.Jama.Automation Mapping NLog.config EULA.rtf /app/ && \
+    chmod +x /app/LemonTree.Connect.Jama.Automation && \
+    rm -rf /tmp/jama-extract && \
+    ln -s /app/LemonTree.Connect.Jama.Automation /usr/local/bin/lemontree.jama || true
+
 # Copy version script
 COPY versions.sh /usr/local/bin/versions.sh
 RUN chmod +x /usr/local/bin/versions.sh
