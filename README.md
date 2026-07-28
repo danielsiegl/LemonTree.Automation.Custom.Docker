@@ -2,8 +2,8 @@
 
 A custom Docker image extending LemonTree.Automation with:
 - **Latest Git** (from git-core PPA)
-- **Git LFS** v3.7.1
-- **PowerShell (pwsh)** v7.6.4 - Set as default shell
+- **Git LFS** (latest from official releases)
+- **PowerShell (pwsh)** (latest from Microsoft repo) - Set as default shell
 - **Bash**
 - **Go** - Latest version from official distribution
 - **LemonTree.Automation** v4.2.2.0 - Available as `lemontree.automation` command
