@@ -74,7 +74,7 @@ RUN mkdir -p /tmp/jama-extract && \
 
 # Copy version script
 COPY versions.sh /usr/local/bin/versions.sh
-RUN chmod +x /usr/local/bin/versions.sh
+RUN sed -i 's/\r$//' /usr/local/bin/versions.sh && chmod +x /usr/local/bin/versions.sh
 
 # Set working directory to root
 WORKDIR /
