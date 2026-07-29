@@ -82,6 +82,9 @@ RUN set -eux && \
 # Verify Node.js installation
 RUN node --version && npm --version
 
+# Shared browser cache directory for both Node.js and Python Playwright runtimes
+ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+
 # Set up Playwright with Chromium for SVG to PNG conversion
 RUN mkdir -p /opt/svg2png && \
     cd /opt/svg2png && \
@@ -89,7 +92,8 @@ RUN mkdir -p /opt/svg2png && \
     npm install playwright && \
     node node_modules/.bin/playwright install --with-deps chromium
 
-# Install Python Playwright package so Python scripts can use the preinstalled runtime
+# Install Python Playwright package so Python scripts can use the preinstalled runtime.
+# System dependencies are already installed above; skip --with-deps to avoid redundancy.
 RUN pip3 install playwright && \
     python3 -m playwright install chromium
 
