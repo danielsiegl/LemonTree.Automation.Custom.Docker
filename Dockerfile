@@ -72,10 +72,10 @@ RUN mkdir -p /tmp/jama-extract && \
     rm -rf /tmp/jama-extract && \
     ln -s /app/LemonTree.Connect.Jama.Automation /usr/local/bin/lemontree.jama || true
 
-# Install Node.js (LTS v20) for Playwright SVG to PNG conversion
+# Install Node.js (LTS v20) for Playwright SVG to PNG conversion, and Python pip for Python Playwright
 RUN set -eux && \
     curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs && \
+    apt-get install -y nodejs python3-pip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -94,7 +94,7 @@ RUN mkdir -p /opt/svg2png && \
 
 # Install Python Playwright package so Python scripts can use the preinstalled runtime.
 # System dependencies are already installed above; skip --with-deps to avoid redundancy.
-RUN pip3 install playwright && \
+RUN pip3 install --break-system-packages playwright && \
     python3 -m playwright install chromium
 
 # Copy SVG to PNG conversion script and make it globally accessible
