@@ -81,8 +81,9 @@ fi
 
 # Playwright (Python) - extract version from pip
 if command -v python3 >/dev/null 2>&1; then
-    py_playwright_version=$(python3 -m playwright --version 2>&1 | awk '{print $2}')
-    if [ -n "$py_playwright_version" ]; then
+    py_playwright_output=$(python3 -m playwright --version 2>&1)
+    if echo "$py_playwright_output" | grep -q "Version"; then
+        py_playwright_version=$(echo "$py_playwright_output" | awk '{print $2}')
         print_version "playwright/python (chromium)" "Playwright $py_playwright_version"
     fi
 fi
