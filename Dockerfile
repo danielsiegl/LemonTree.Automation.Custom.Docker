@@ -1,4 +1,4 @@
-FROM nexus.lieberlieber.com:5000/lieberlieber/lemontree.automation:latest
+FROM nexus.lieberlieber.com:5000/lieberlieber/lemontree.automation:latest AS classic
 
 USER root
 
@@ -73,6 +73,15 @@ RUN mkdir -p /tmp/jama-extract && \
     rm -rf /tmp/jama-extract && \
     ln -s /app/LemonTree.Connect.Jama.Automation /usr/local/bin/lemontree.jama || true
 
+# Copy version script
+COPY versions.sh /usr/local/bin/versions.sh
+RUN sed -i 's/\r$//' /usr/local/bin/versions.sh && chmod +x /usr/local/bin/versions.sh
+
+# Set working directory to root
+WORKDIR /
+
+FROM classic AS playwright
+
 # Install Node.js (LTS v20) for Playwright SVG to PNG conversion, and Python pip for Python Playwright
 RUN set -eux && \
     curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
@@ -109,13 +118,6 @@ RUN echo '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circ
     test -f /tmp/test.png && \
     rm /tmp/test.svg /tmp/test.png
 
-# Copy version script
-COPY versions.sh /usr/local/bin/versions.sh
-RUN sed -i 's/\r$//' /usr/local/bin/versions.sh && chmod +x /usr/local/bin/versions.sh
-
-# Set working directory to root
 WORKDIR /
-
-
 
 
