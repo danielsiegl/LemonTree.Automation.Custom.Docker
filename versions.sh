@@ -73,10 +73,18 @@ if command -v node >/dev/null 2>&1; then
     print_version "node" "Node.js $node_version"
 fi
 
-# Playwright - extract version from installed package
+# Playwright (Node.js) - extract version from installed package
 if [ -f /opt/svg2png/node_modules/playwright/package.json ]; then
     playwright_version=$(node -e "console.log(require('/opt/svg2png/node_modules/playwright/package.json').version)" 2>&1)
-    print_version "playwright (chromium)" "Playwright $playwright_version"
+    print_version "playwright/node (chromium)" "Playwright $playwright_version"
+fi
+
+# Playwright (Python) - extract version from pip
+if command -v python3 >/dev/null 2>&1; then
+    py_playwright_version=$(python3 -m playwright --version 2>&1 | awk '{print $2}')
+    if [ -n "$py_playwright_version" ]; then
+        print_version "playwright/python (chromium)" "Playwright $py_playwright_version"
+    fi
 fi
 
 echo ""
