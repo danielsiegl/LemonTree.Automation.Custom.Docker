@@ -118,6 +118,3 @@ RUN echo '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circ
     test -f /tmp/test.png && \
     rm /tmp/test.svg /tmp/test.png
 
-WORKDIR /
-
-
