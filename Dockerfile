@@ -89,6 +89,10 @@ RUN mkdir -p /opt/svg2png && \
     npm install playwright && \
     node node_modules/.bin/playwright install --with-deps chromium
 
+# Install Python Playwright package so Python scripts can use the preinstalled runtime
+RUN pip3 install playwright && \
+    python3 -m playwright install chromium
+
 # Copy SVG to PNG conversion script and make it globally accessible
 COPY svg2png.js /opt/svg2png/svg2png.js
 RUN chmod +x /opt/svg2png/svg2png.js && \
