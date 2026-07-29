@@ -8,9 +8,9 @@ A custom Docker image extending LemonTree.Automation with:
 - **Go** - Latest version from official distribution
 - **Node.js** - LTS v20 (for Playwright)
 - **Playwright + Chromium** - Browser-based SVG to PNG conversion via `svg2png` command
-- **LemonTree.Automation** v4.2.2.0 - Available as `lemontree.automation` command
-- **LemonTree.Pipeline.Tools.ModelCheck** v2.5.6.23 - Available as `lemontree.modelcheck` command
-- **LemonTree.Connect.Automation.Polarion** v3.1.0.0 - Available as `lemontree.polarion` command
+- **LemonTree.Automation** - Available as `lemontree.automation` command
+- **LemonTree.Pipeline.Tools.ModelCheck** - Available as `lemontree.modelcheck` command
+- **LemonTree.Connect.Automation.Polarion** - Available as `lemontree.polarion` command
 - **LemonTree.Connect.Jama.Automation** - Available as `lemontree.jama` command
 
 ## Quick Start
