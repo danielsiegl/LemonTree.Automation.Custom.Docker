@@ -5,6 +5,7 @@ A custom Docker image extending LemonTree.Automation with:
 - **Git LFS** (latest from official releases)
 - **PowerShell (pwsh)** (latest from Microsoft repo) - Set as default shell
 - **Bash**
+- **SQLite3**
 - **Go** - Latest version from official distribution
 - **Node.js** - LTS v20 (for Playwright)
 - **Playwright + Chromium** - Browser-based SVG to PNG conversion via `svg2png` command
@@ -34,6 +35,7 @@ PS /> lemontree.polarion --help
 PS /> lemontree.jama --help
 PS /> git --version
 PS /> git lfs version
+PS /> sqlite3 --version
 PS /> go version
 PS /> node --version
 PS /> svg2png input.svg output.png
@@ -46,6 +48,7 @@ docker run -it ghcr.io/danielsiegl/lemontree.automation.custom.docker:latest -c 
 docker run -it ghcr.io/danielsiegl/lemontree.automation.custom.docker:latest -c "lemontree.modelcheck --help"
 docker run -it ghcr.io/danielsiegl/lemontree.automation.custom.docker:latest -c "lemontree.polarion --help"
 docker run -it ghcr.io/danielsiegl/lemontree.automation.custom.docker:latest -c "lemontree.jama --help"
+docker run -it ghcr.io/danielsiegl/lemontree.automation.custom.docker:latest -c "sqlite3 --version"
 ```
 
 ### Using Bash

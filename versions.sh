@@ -39,6 +39,12 @@ print_version "git lfs" "Git LFS $git_lfs_version"
 pwsh_version=$(pwsh --version 2>&1 | awk '{print $NF}')
 print_version "pwsh" "PowerShell $pwsh_version"
 
+# SQLite
+if command -v sqlite3 >/dev/null 2>&1; then
+    sqlite_version=$(sqlite3 --version 2>&1 | awk '{print $1}')
+    print_version "sqlite3" "SQLite $sqlite_version"
+fi
+
 # Go - extract version number only (remove "go" prefix)
 go_version=$(go version 2>&1 | awk '{print $3}' | sed 's/^go//')
 print_version "go" "Go $go_version"
@@ -91,5 +97,4 @@ fi
 echo ""
 echo "════════════════════════════════════════════════════════════"
 echo ""
-
 
