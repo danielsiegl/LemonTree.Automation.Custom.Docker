@@ -15,8 +15,19 @@ including the final image size.
 
 param(
     [switch]$NoCache = $false,
-    [string]$ImageTag = "lemontree.automation.custom:latest"
+    [ValidateSet("classic", "playwright")]
+    [string]$Target = "classic",
+    [string]$ImageTag = ""
 )
+
+if ([string]::IsNullOrWhiteSpace($ImageTag)) {
+    if ($Target -eq "playwright") {
+        $ImageTag = "lemontree.automation.custom-playwright:latest"
+    }
+    else {
+        $ImageTag = "lemontree.automation.custom:latest"
+    }
+}
 
 Write-Host "================================" -ForegroundColor Cyan
 Write-Host "Building Docker Image" -ForegroundColor Cyan
@@ -24,7 +35,7 @@ Write-Host "================================" -ForegroundColor Cyan
 Write-Host ""
 
 # Build the image
-$buildCommand = "docker build -t $ImageTag"
+$buildCommand = "docker build --target $Target -t $ImageTag"
 if ($NoCache) {
     $buildCommand += " --no-cache"
 }
