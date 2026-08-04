@@ -7,6 +7,7 @@ A set of custom Docker images extending LemonTree.Automation with:
 - **Bash**
 - **SQLite3**
 - **Go** - Latest version from official distribution
+  
 - **LemonTree.Automation** - Available as `lemontree.automation` command
 - **LemonTree.Pipeline.Tools.ModelCheck** - Available as `lemontree.modelcheck` command
 - **LemonTree.Connect.Automation.Polarion** - Available as `lemontree.polarion` command
