@@ -1,4 +1,4 @@
-FROM nexus.lieberlieber.com:5000/lieberlieber/lemontree.automation:latest AS classic
+FROM lieberlieber.nexus:5000/lieberlieber/lemontree.automation:latest AS classic
 
 USER root
 
@@ -49,14 +49,14 @@ RUN ln -s /app/lemontree.automation /usr/local/bin/lemontree.automation || true
 
 # Download and set up LemonTree.Pipeline.Tools.ModelCheck
 RUN cd /app && \
-    curl -o lemontree.pipeline.tools.modelcheck https://nexus.lieberlieber.com/repository/lemontree-pipeline-tools/LemonTree.Pipeline.Tools.ModelCheck && \
+    curl -o lemontree.pipeline.tools.modelcheck https://lieberlieber.nexus/repository/lemontree-pipeline-tools/LemonTree.Pipeline.Tools.ModelCheck && \
     chmod +x lemontree.pipeline.tools.modelcheck && \
     ln -s /app/lemontree.pipeline.tools.modelcheck /usr/local/bin/lemontree.modelcheck || true
 
 # Download and set up LemonTree.Connect.Automation.Polarion
 RUN mkdir -p /tmp/polarion-extract && \
     cd /tmp/polarion-extract && \
-    curl -L -o lemontree.connect.polarion.zip https://nexus.lieberlieber.com/repository/lemontree-release/LemonTree.Automation/LemonTree.Connect.Automation.Polarion.Linux_3.1.0.zip && \
+    curl -L -o lemontree.connect.polarion.zip https://lieberlieber.nexus/repository/lemontree-release/LemonTree.Automation/LemonTree.Connect.Automation.Polarion.Linux_3.1.0.zip && \
     unzip -q lemontree.connect.polarion.zip && \
     cp -r LemonTree.Connect.Polarion.Automation Mapping NLog.config EULA.rtf /app/ && \
     chmod +x /app/LemonTree.Connect.Polarion.Automation && \
@@ -66,7 +66,7 @@ RUN mkdir -p /tmp/polarion-extract && \
 # Download and set up LemonTree.Connect.Automation.Jama
 RUN mkdir -p /tmp/jama-extract && \
     cd /tmp/jama-extract && \
-    curl -L -o lemontree.connect.jama.zip https://nexus.lieberlieber.com/repository/lemontree-release/LemonTree.Automation/LemonTree.Connect.Jama.Automation.Linux_latest.zip && \
+    curl -L -o lemontree.connect.jama.zip https://lieberlieber.nexus/repository/lemontree-release/LemonTree.Automation/LemonTree.Connect.Jama.Automation.Linux_latest.zip && \
     unzip -q lemontree.connect.jama.zip && \
     cp -r LemonTree.Connect.Jama.Automation Mapping NLog.config EULA.rtf /app/ && \
     chmod +x /app/LemonTree.Connect.Jama.Automation && \
