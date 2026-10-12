@@ -1,4 +1,4 @@
-FROM lieberlieber.nexus:5000/lieberlieber/lemontree.automation:latest AS classic
+FROM lieberlieber.nexus/docker/lieberlieber/lemontree.automation:latest AS classic
 
 USER root
 
